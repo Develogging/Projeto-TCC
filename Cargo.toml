@@ -10,5 +10,6 @@ opt-level = 1
 opt-level = 3
 
 [dependencies]
+avian3d = "0.3.0"
 bevy = "0.16.0"
 rand = "0.9.1"
