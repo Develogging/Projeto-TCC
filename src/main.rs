@@ -1,4 +1,6 @@
-//! A simple 3D scene with light shining over a cube sitting on a plane.
+// -------- SISTEMA DE MOVIMENTO ----------
+// Separar o sistema de onde vem as entradas de movimento (teclado, rede neural, random, etc.) do sistema que faz o movimento em si, ou seja, o input se torna uma "intenção de movimento" e outro sistema cuida do movimento em si, permitindo que a fonte do movimento venha de qualquer local, que no futuro será da rede neural.
+// Podemos aplicar esse conceito a outras coisas futuramente, como a intenção de investigar um som, etc.
 
 use bevy::prelude::*;
 
