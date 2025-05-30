@@ -3,12 +3,12 @@
 // Podemos aplicar esse conceito a outras coisas futuramente, como a intenção de investigar um som, etc.
 
 use bevy::prelude::*;
+use rust_decimal::Decimal;
 
-fn main() {
-    App::new()
-        .add_plugins(DefaultPlugins)
-        .add_systems(Startup, setup)
-        .run();
+#[derive(Component)]
+struct MovementIntent {
+    direction: Vec3,
+    magnitude: Decimal,
 }
 
 /// set up a simple 3D scene
@@ -42,4 +42,11 @@ fn setup(
         Camera3d::default(),
         Transform::from_xyz(-2.5, 4.5, 9.0).looking_at(Vec3::ZERO, Vec3::Y),
     ));
+}
+
+fn main() {
+    App::new()
+        .add_plugins(DefaultPlugins)
+        .add_systems(Startup, setup)
+        .run();
 }

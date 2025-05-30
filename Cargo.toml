@@ -13,3 +13,4 @@ opt-level = 3
 avian3d = "0.3.0"
 bevy = "0.16.0"
 rand = "0.9.1"
+rust_decimal = "1.37.1"
