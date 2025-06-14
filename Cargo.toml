@@ -10,7 +10,7 @@ opt-level = 1
 opt-level = 3
 
 [dependencies]
-avian3d = "0.3.0"
+avian3d = "0.3.1"
 bevy = "0.16.1"
 rand = "0.9.1"
 rust_decimal = "1.37.1"

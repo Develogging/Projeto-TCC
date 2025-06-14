@@ -5,6 +5,7 @@
 use avian3d::prelude::*;
 use bevy::prelude::*;
 use rand::Rng;
+use std::f32::consts::PI;
 // use rust_decimal::Decimal;
 
 // --- COMPONENTES ---
@@ -32,8 +33,30 @@ struct AutonomousMovement {
     timer: Timer,
 }
 
-// #[derive(Component)]
-// struct PlayerControlled;
+/// Armazena os parâmetros e os dados de saída do sistema de visão da criatura.
+#[derive(Component)]
+struct CreatureVision {
+    /// O quão longe a criatura pode "ver".
+    range: f32,
+    /// O ângulo do campo de visão (em radianos).
+    angle: f32,
+    /// O número de raios a serem lançados dentro do campo de visão.
+    ray_count: u32,
+    /// Os resultados do raycast (distância para cada raio). `f32::MAX` se nada for atingido.
+    readings: Vec<f32>,
+}
+
+impl Default for CreatureVision {
+    fn default() -> Self {
+        let ray_count = 11; // Usar um número ímpar para ter um raio central
+        Self {
+            range: 8.0,
+            angle: PI / 2.0, // 90 graus
+            ray_count,
+            readings: vec![f32::MAX; ray_count as usize],
+        }
+    }
+}
 
 // --- CONSTANTES ---
 
@@ -126,13 +149,12 @@ fn creature_autonomous_movement(
 //     }
 // }
 
-// TODO: alterar para usar ExternalForce ou algum outro tipo de força com conotações físicas.
 /// Sistema genérico para aplicar forças com base no MovementIntent.
 /// Funciona para qualquer entidade que tenha MovementIntent, ExternalForce, e um componente de velocidade (Player/Creature).
 fn apply_movement_force(
     mut query: Query<(
         &MovementIntent,
-        &mut LinearVelocity,
+        &mut ExternalForce,
         Option<&Player>, // Usamos Option para diferenciar a velocidade
     )>,
 ) {
@@ -182,7 +204,7 @@ fn setup(
     // --- JOGADOR (Cápsula controlável) ---
     commands.spawn((
         RigidBody::Dynamic,
-        LinearVelocity::default(),
+        ExternalForce::default(),
         LinearDamping(2.0),
         LockedAxes::ROTATION_LOCKED,
         // Usamos uma cápsula para o colisor do jogador, que navega melhor no ambiente
@@ -197,8 +219,7 @@ fn setup(
     // --- CRIATURA (Cubo autônomo) ---
     commands.spawn((
         RigidBody::Dynamic,
-        // Usamos velocidade linear em vez de força externa para um controle mais direto
-        LinearVelocity::default(),
+        ExternalForce::default(),
         // Amortecimento para que a criatura pare quando a intenção de movimento for zero
         LinearDamping(2.0),
         // Bloqueia a rotação para evitar que o cubo tombe
