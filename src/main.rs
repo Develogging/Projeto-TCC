@@ -1,4 +1,5 @@
 // Declara os novos módulos para que o compilador os encontre
+mod camera;
 mod creature;
 mod movement;
 mod player;
