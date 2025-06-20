@@ -1,7 +1,8 @@
 use crate::player::Player;
-use avian3d::prelude::PhysicsSet; // Usaremos para ordenar o sistema
+use avian3d::prelude::PhysicsSet;
 use bevy::input::mouse::{MouseMotion, MouseWheel};
-use bevy::prelude::*; // Precisamos saber quem é o jogador
+use bevy::prelude::*;
+use bevy::window::PrimaryWindow; // Precisamos disso para pegar a janela principal de forma robusta
 
 // --- Plugin ---
 
@@ -9,33 +10,28 @@ pub struct CameraPlugin;
 
 impl Plugin for CameraPlugin {
     fn build(&self, app: &mut App) {
-        app.add_systems(Startup, spawn_camera) // Spawna a câmera na inicialização
-            .add_systems(
-                Update,
-                (
-                    handle_camera_input,
-                    cursor_grab_system,
-                    // O sistema de atualização da câmera deve rodar DEPOIS da sincronização da física.
-                    // Isso garante que a posição do jogador já foi atualizada pelo motor de física,
-                    // evitando um atraso visual de um frame (one-frame lag).
-                    update_camera_transform.after(PhysicsSet::Sync),
-                ),
-            );
+        app.add_systems(Startup, spawn_camera).add_systems(
+            Update,
+            (
+                handle_camera_input,
+                // O sistema de cursor agora está correto para Bevy 0.16
+                cursor_grab_system,
+                // A ordenação do sistema para evitar "one-frame lag" continua correta
+                update_camera_transform.after(PhysicsSet::Sync),
+            ),
+        );
     }
 }
 
 // --- Componente ---
 
 /// Componente que armazena o estado e configuração da nossa câmera em terceira pessoa.
+/// (Nenhuma mudança necessária aqui)
 #[derive(Component)]
 struct ThirdPersonCamera {
-    /// O ponto em torno do qual a câmera orbita. Será atualizado para a posição do jogador.
     focus: Vec3,
-    /// A distância da câmera ao ponto de foco (controlado pelo scroll do mouse).
     radius: f32,
-    /// Rotação horizontal em radianos (controlado pelo movimento X do mouse).
     yaw: f32,
-    /// Rotação vertical em radianos (controlado pelo movimento Y do mouse).
     pitch: f32,
 }
 
@@ -45,7 +41,7 @@ impl Default for ThirdPersonCamera {
             focus: Vec3::ZERO,
             radius: 5.0,
             yaw: 0.0,
-            pitch: 0.4, // Um pouco inclinado para baixo
+            pitch: 0.4,
         }
     }
 }
@@ -53,99 +49,96 @@ impl Default for ThirdPersonCamera {
 // --- Sistemas ---
 
 /// Spawna a entidade da câmera com nossos componentes customizados.
+/// (Nenhuma mudança necessária aqui)
 fn spawn_camera(mut commands: Commands) {
     commands.spawn((
-        Camera3dBundle::default(),    // O bundle padrão do Bevy para câmera 3D
-        ThirdPersonCamera::default(), // Nosso componente com o estado da câmera
+        Camera3d::default(),
+        ThirdPersonCamera::default(),
         Name::new("Third Person Camera"),
     ));
 }
 
 /// Sistema que lida com o input do mouse para orbitar e dar zoom.
+/// Foi atualizado para usar a query da janela primária.
 fn handle_camera_input(
     mut camera_query: Query<&mut ThirdPersonCamera>,
     mut mouse_motion_events: EventReader<MouseMotion>,
     mut mouse_wheel_events: EventReader<MouseWheel>,
-    windows: Query<&Window>,
+    // API MODERNA: Pegamos a janela através de uma query com o marcador PrimaryWindow
+    window_query: Query<&Window, With<PrimaryWindow>>,
 ) {
-    let Ok(mut camera) = camera_query.get_single_mut() else {
+    let Ok(mut camera) = camera_query.single_mut() else {
         return;
     };
-    let window = windows.single();
+    let Ok(window) = window_query.single() else {
+        return;
+    };
 
-    // Só processa o movimento do mouse se o cursor estiver preso na janela
-    if window.cursor.grab_mode == bevy::window::CursorGrabMode::Locked {
-        // Rotação (órbita)
+    // A lógica interna aqui já estava correta, verificando o grab_mode.
+    if window.cursor_options.grab_mode == bevy::window::CursorGrabMode::Locked {
         let sensitivity = 0.002;
         for event in mouse_motion_events.read() {
             camera.yaw -= event.delta.x * sensitivity;
-            camera.pitch -= event.delta.y * sensitivity;
+            // camera.pitch -= event.delta.y * sensitivity; // Mouse para cima -> câmera para cima
+            camera.pitch += event.delta.y * sensitivity; // Mouse para cima -> câmera para baixo
         }
     }
 
-    // Zoom (raio)
     let zoom_sensitivity = 0.2;
     for event in mouse_wheel_events.read() {
         camera.radius -= event.y * zoom_sensitivity;
     }
 
-    // Limita o raio (zoom) para não ficar muito perto ou longe
     camera.radius = camera.radius.clamp(2.0, 20.0);
-
-    // Limita o pitch para evitar que a câmera vire de cabeça para baixo
-    let max_pitch = std::f32::consts::FRAC_PI_2 - 0.05; // Pouco menos que 90 graus
+    let max_pitch = std::f32::consts::FRAC_PI_2 - 0.05;
     camera.pitch = camera.pitch.clamp(-max_pitch, max_pitch);
 }
 
-/// Atualiza a posição e rotação (Transform) da câmera com base no estado do componente ThirdPersonCamera
-/// e na posição atual do jogador.
+/// Atualiza o Transform da câmera com base na posição do jogador.
+/// (Nenhuma mudança necessária aqui)
 fn update_camera_transform(
     mut camera_query: Query<(&mut Transform, &mut ThirdPersonCamera)>,
     player_query: Query<&GlobalTransform, With<Player>>,
 ) {
-    let Ok((mut camera_transform, mut camera)) = camera_query.get_single_mut() else {
+    let Ok((mut camera_transform, mut camera)) = camera_query.single_mut() else {
         return;
     };
-    let Ok(player_transform) = player_query.get_single() else {
+    let Ok(player_transform) = player_query.single() else {
         return;
     };
 
-    // 1. Atualiza o ponto de foco para a posição do jogador
-    // Adicionamos um pequeno offset vertical para focar no "centro" do jogador, não nos pés.
     camera.focus = player_transform.translation() + Vec3::Y * 1.0;
-
-    // 2. Calcula a rotação da câmera com base no yaw e pitch
     let rotation = Quat::from_rotation_y(camera.yaw) * Quat::from_rotation_x(-camera.pitch);
-
-    // 3. Calcula o offset da câmera (a posição relativa ao foco)
-    // Começa com um vetor apontando para trás e o rotaciona
     let offset = rotation * (Vec3::Z * camera.radius);
-
-    // 4. Calcula a posição final da câmera no mundo
     let final_position = camera.focus + offset;
 
-    // 5. Atualiza o transform da câmera para que ela se posicione corretamente e olhe para o foco
     *camera_transform =
         Transform::from_translation(final_position).looking_at(camera.focus, Vec3::Y);
 }
 
-/// Sistema simples para capturar/liberar o cursor do mouse.
+/// Sistema para capturar/liberar o cursor do mouse.
+/// *** ESTE É O SISTEMA CORRIGIDO ***
 fn cursor_grab_system(
-    mut windows: Query<&mut Window>,
+    // API MODERNA: Em vez de `Query<&mut Window>`, usamos `Query<&mut Window, With<PrimaryWindow>>`
+    // para garantir que estamos modificando a janela principal.
+    mut window_query: Query<&mut Window, With<PrimaryWindow>>,
     mouse_button: Res<ButtonInput<MouseButton>>,
     key_code: Res<ButtonInput<KeyCode>>,
 ) {
-    let Ok(mut window) = windows.get_single_mut() else {
+    let Ok(mut window) = window_query.single_mut() else {
         return;
     };
 
     if mouse_button.just_pressed(MouseButton::Left) {
-        window.cursor.grab_mode = bevy::window::CursorGrabMode::Locked;
-        window.cursor.visible = false;
+        // API MODERNA (0.15+): Modificamos os campos `grab_mode` e `visible` do recurso `Cursor`
+        // que está dentro da entidade `Window`.
+        window.cursor_options.grab_mode = bevy::window::CursorGrabMode::Locked;
+        window.cursor_options.visible = false;
     }
 
     if key_code.just_pressed(KeyCode::Escape) {
-        window.cursor.grab_mode = bevy::window::CursorGrabMode::None;
-        window.cursor.visible = true;
+        // API MODERNA (0.15+): Restauramos os valores para liberar o cursor.
+        window.cursor_options.grab_mode = bevy::window::CursorGrabMode::None;
+        window.cursor_options.visible = true;
     }
 }

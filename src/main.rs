@@ -6,6 +6,7 @@ mod player;
 
 use avian3d::prelude::*;
 use bevy::prelude::*;
+use camera::CameraPlugin;
 // Importa os plugins e componentes necessários dos novos módulos
 use creature::{AutonomousMovement, CUBE_SIZE, Creature, CreaturePlugin};
 use movement::{MovementIntent, MovementPlugin, MovementStats};
@@ -21,7 +22,7 @@ fn main() {
                 primary_window: Some(Window {
                     title: "TCC - Simulação de Ecossistema".to_string(),
                     position: WindowPosition::Centered(MonitorSelection::Index(1)),
-                    resolution: (1280., 720.).into(),
+                    // resolution: (1280., 720.).into(),
                     ..default()
                 }),
                 ..default()
@@ -33,6 +34,7 @@ fn main() {
             MovementPlugin,
             PlayerPlugin,
             CreaturePlugin,
+            CameraPlugin,
         ))
         .add_systems(Startup, setup)
         .run();
@@ -106,11 +108,5 @@ fn setup(
             ..default()
         },
         Transform::from_xyz(4.0, 8.0, 4.0),
-    ));
-
-    // Câmera
-    commands.spawn((
-        Camera3d::default(),
-        Transform::from_xyz(-10.0, 10.0, 15.0).looking_at(Vec3::ZERO, Vec3::Y),
     ));
 }
