@@ -1,6 +1,6 @@
 use crate::movement::MovementIntent;
 use avian3d::{
-    math::Vector,
+    math::{AdjustPrecision, Scalar, Vector},
     prelude::{SpatialQuery, SpatialQueryFilter},
 };
 use bevy::prelude::*;
@@ -34,7 +34,7 @@ pub struct AutonomousMovement {
 }
 
 /// Armazena os parâmetros e os dados de saída do sistema de visão da criatura.
-#[derive(Component)]
+#[derive(Component, Debug)]
 pub struct CreatureVision {
     pub range: f32,
     pub angle: f32,
@@ -79,8 +79,23 @@ fn creature_autonomous_movement(
 }
 
 fn creature_vision_system(
-    spatial_query: SpatialQuery,
+    query: SpatialQuery,
     mut creature_query: Query<(Entity, &mut CreatureVision, &GlobalTransform), With<Creature>>,
     mut gizmos: Gizmos,
 ) {
+    let origin = Vector::new(-200.0, 2.0, 0.0);
+    let direction = Dir3::X;
+    let filter = SpatialQueryFilter::default();
+
+    if let Some(ray_hit_data) =
+        query.cast_ray_predicate(origin, direction, Scalar::MAX, true, &filter, &|entity| {
+            println!("{:?}", creature_query.get(entity));
+            true
+        })
+    {
+        // Set the length of the ray indicator to look more like a laser,
+        let contact_point = (origin + direction.adjust_precision() * ray_hit_data.distance).x;
+        let target_scale = 1000.0 + contact_point * 2.0;
+        println!("{}, {}", contact_point, target_scale);
+    }
 }
