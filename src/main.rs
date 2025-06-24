@@ -28,8 +28,7 @@ fn main() {
                 ..default()
             }),
             PhysicsPlugins::default(),
-            // PhysicsDebugPlugin::default(), // Descomente para visualizar colisores
-
+            PhysicsDebugPlugin::default(),
             // Adiciona nossos plugins customizados. Esta parte permanece igual.
             MovementPlugin,
             PlayerPlugin,
@@ -99,6 +98,7 @@ fn setup(
         Mesh3d(meshes.add(Cuboid::from_length(CUBE_SIZE))),
         MeshMaterial3d(materials.add(Color::srgb_u8(200, 100, 100))),
         Transform::from_xyz(2.0, 2.0, 0.0),
+        DebugRender::default().with_collider_color(Color::srgb(1.0, 0.0, 0.0)),
     ));
 
     // Luz

@@ -1,4 +1,8 @@
 use crate::movement::MovementIntent;
+use avian3d::{
+    math::Vector,
+    prelude::{SpatialQuery, SpatialQueryFilter},
+};
 use bevy::prelude::*;
 use rand::Rng;
 use std::f32::consts::PI; // Importando do nosso novo módulo
@@ -10,7 +14,10 @@ pub struct CreaturePlugin;
 impl Plugin for CreaturePlugin {
     fn build(&self, app: &mut App) {
         // Sistema de movimento autônomo (placeholder) é adicionado aqui.
-        app.add_systems(Update, creature_autonomous_movement);
+        app.add_systems(
+            Update,
+            (creature_autonomous_movement, creature_vision_system),
+        );
     }
 }
 
@@ -69,4 +76,11 @@ fn creature_autonomous_movement(
             intent.direction = Vec3::new(random_x, 0.0, random_z).normalize_or_zero();
         }
     }
+}
+
+fn creature_vision_system(
+    spatial_query: SpatialQuery,
+    mut creature_query: Query<(Entity, &mut CreatureVision, &GlobalTransform), With<Creature>>,
+    mut gizmos: Gizmos,
+) {
 }
