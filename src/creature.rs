@@ -1,11 +1,11 @@
 use crate::movement::MovementIntent;
-use avian3d::{
-    math::{AdjustPrecision, Scalar, Vector},
-    prelude::{SpatialQuery, SpatialQueryFilter},
-};
+// use avian3d::{
+//     math::{AdjustPrecision, Scalar, Vector},
+//     prelude::{SpatialQuery, SpatialQueryFilter},
+// };
 use bevy::prelude::*;
 use rand::Rng;
-use std::f32::consts::PI; // Importando do nosso novo módulo
+// use std::f32::consts::PI; // Importando do nosso novo módulo
 
 // --- Plugin ---
 
@@ -16,7 +16,7 @@ impl Plugin for CreaturePlugin {
         // Sistema de movimento autônomo (placeholder) é adicionado aqui.
         app.add_systems(
             Update,
-            (creature_autonomous_movement, creature_vision_system),
+            creature_autonomous_movement, /*creature_vision_system*/
         );
     }
 }
@@ -33,26 +33,26 @@ pub struct AutonomousMovement {
     pub timer: Timer,
 }
 
-/// Armazena os parâmetros e os dados de saída do sistema de visão da criatura.
-#[derive(Component, Debug)]
-pub struct CreatureVision {
-    pub range: f32,
-    pub angle: f32,
-    pub ray_count: u32,
-    pub readings: Vec<f32>,
-}
+// /// Armazena os parâmetros e os dados de saída do sistema de visão da criatura.
+// #[derive(Component, Debug)]
+// pub struct CreatureVision {
+//     pub range: f32,
+//     pub angle: f32,
+//     pub ray_count: u32,
+//     pub readings: Vec<f32>,
+// }
 
-impl Default for CreatureVision {
-    fn default() -> Self {
-        let ray_count = 11;
-        Self {
-            range: 8.0,
-            angle: PI / 2.0, // 90 graus
-            ray_count,
-            readings: vec![f32::MAX; ray_count as usize],
-        }
-    }
-}
+// impl Default for CreatureVision {
+//     fn default() -> Self {
+//         let ray_count = 11;
+//         Self {
+//             range: 8.0,
+//             angle: PI / 2.0, // 90 graus
+//             ray_count,
+//             readings: vec![f32::MAX; ray_count as usize],
+//         }
+//     }
+// }
 
 // --- Constantes Específicas da Criatura ---
 pub const CUBE_SIZE: f32 = 1.0;
@@ -78,24 +78,24 @@ fn creature_autonomous_movement(
     }
 }
 
-fn creature_vision_system(
-    query: SpatialQuery,
-    mut creature_query: Query<(Entity, &mut CreatureVision, &GlobalTransform), With<Creature>>,
-    mut gizmos: Gizmos,
-) {
-    let origin = Vector::new(-200.0, 2.0, 0.0);
-    let direction = Dir3::X;
-    let filter = SpatialQueryFilter::default();
+// fn creature_vision_system(
+//     query: SpatialQuery,
+//     mut creature_query: Query<(Entity, &mut CreatureVision, &GlobalTransform), With<Creature>>,
+//     mut gizmos: Gizmos,
+// ) {
+//     let origin = Vector::new(-200.0, 2.0, 0.0);
+//     let direction = Dir3::X;
+//     let filter = SpatialQueryFilter::default();
 
-    if let Some(ray_hit_data) =
-        query.cast_ray_predicate(origin, direction, Scalar::MAX, true, &filter, &|entity| {
-            println!("{:?}", creature_query.get(entity));
-            true
-        })
-    {
-        // Set the length of the ray indicator to look more like a laser,
-        let contact_point = (origin + direction.adjust_precision() * ray_hit_data.distance).x;
-        let target_scale = 1000.0 + contact_point * 2.0;
-        println!("{}, {}", contact_point, target_scale);
-    }
-}
+//     if let Some(ray_hit_data) =
+//         query.cast_ray_predicate(origin, direction, Scalar::MAX, true, &filter, &|entity| {
+//             println!("{:?}", creature_query.get(entity));
+//             true
+//         })
+//     {
+//         // Set the length of the ray indicator to look more like a laser,
+//         let contact_point = (origin + direction.adjust_precision() * ray_hit_data.distance).x;
+//         let target_scale = 1000.0 + contact_point * 2.0;
+//         println!("{}, {}", contact_point, target_scale);
+//     }
+// }
