@@ -5,15 +5,14 @@ use crate::movement::MovementIntent;
 // };
 use bevy::prelude::*;
 use rand::Rng;
-// use std::f32::consts::PI; // Importando do nosso novo módulo
+// use std::f32::consts::PI;
 
-// --- Plugin ---
+pub const CUBE_SIZE: f32 = 1.0;
 
 pub struct CreaturePlugin;
 
 impl Plugin for CreaturePlugin {
     fn build(&self, app: &mut App) {
-        // Sistema de movimento autônomo (placeholder) é adicionado aqui.
         app.add_systems(
             Update,
             creature_autonomous_movement, /*creature_vision_system*/
@@ -21,13 +20,9 @@ impl Plugin for CreaturePlugin {
     }
 }
 
-// --- Componentes ---
-
-/// Componente marcador para a entidade da criatura.
 #[derive(Component)]
 pub struct Creature;
 
-/// Componente para gerenciar o comportamento de movimento autônomo da criatura.
 #[derive(Component)]
 pub struct AutonomousMovement {
     pub timer: Timer,
@@ -54,13 +49,6 @@ pub struct AutonomousMovement {
 //     }
 // }
 
-// --- Constantes Específicas da Criatura ---
-pub const CUBE_SIZE: f32 = 1.0;
-
-// --- Sistemas ---
-
-/// Sistema que define a intenção de movimento para a CRIATURA.
-/// (Código movido de main.rs, sem alteração de lógica)
 fn creature_autonomous_movement(
     time: Res<Time>,
     mut query: Query<(&mut MovementIntent, &mut AutonomousMovement), With<Creature>>,

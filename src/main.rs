@@ -1,4 +1,3 @@
-// Declara os novos módulos para que o compilador os encontre
 mod camera;
 mod creature;
 mod movement;
@@ -7,13 +6,11 @@ mod player;
 use avian3d::prelude::*;
 use bevy::prelude::*;
 use camera::CameraPlugin;
-// Importa os plugins e componentes necessários dos novos módulos
 use creature::{AutonomousMovement, CUBE_SIZE, Creature, CreaturePlugin};
 use movement::{MovementIntent, MovementPlugin, MovementStats};
 use player::{PLAYER_HEIGHT, PLAYER_RADIUS, Player, PlayerPlugin};
 
-// --- CONSTANTES GLOBAIS ---
-const GROUND_RADIUS: f32 = 20.0; // Mantendo o chão maior para dar mais espaço
+const GROUND_RADIUS: f32 = 20.0;
 
 fn main() {
     App::new()
@@ -29,7 +26,6 @@ fn main() {
             }),
             PhysicsPlugins::default(),
             PhysicsDebugPlugin::default(),
-            // Adiciona nossos plugins customizados. Esta parte permanece igual.
             MovementPlugin,
             PlayerPlugin,
             CreaturePlugin,
@@ -39,7 +35,6 @@ fn main() {
         .run();
 }
 
-/// Sistema de setup, agora usando exatamente a sua estrutura de spawn original.
 fn setup(
     mut commands: Commands,
     mut meshes: ResMut<Assets<Mesh>>,
@@ -55,21 +50,21 @@ fn setup(
 
     // Jogador (Cápsula)
     commands.spawn((
-        // Componentes de Física e Movimento
+        // Física e movimento
         RigidBody::Dynamic,
         ExternalForce::default(),
         LinearDamping(2.0),
         LockedAxes::ROTATION_LOCKED,
-        Collider::capsule(PLAYER_HEIGHT / 2.0, PLAYER_RADIUS),
-        // Componentes de Lógica
+        Collider::capsule(PLAYER_RADIUS / 2.0, PLAYER_HEIGHT),
+        // Lógica
         MovementIntent::default(),
         MovementStats {
             speed: 5.0,
             acceleration: 15.0,
-        }, // Usando a nova estrutura com aceleração
+        },
         Player,
         Name::new("Player"),
-        // Componentes de Renderização e Posição
+        // Renderização e posição
         Mesh3d(meshes.add(Capsule3d::new(PLAYER_RADIUS, PLAYER_HEIGHT))),
         MeshMaterial3d(materials.add(Color::srgb_u8(124, 144, 255))),
         Transform::from_xyz(0.0, 2.0, 0.0),
@@ -77,24 +72,24 @@ fn setup(
 
     // Criatura (Cubo)
     commands.spawn((
-        // Componentes de Física e Movimento
+        // Física e movimento
         RigidBody::Dynamic,
         ExternalForce::default(),
         LinearDamping(2.0),
         LockedAxes::ROTATION_LOCKED,
         Collider::cuboid(CUBE_SIZE, CUBE_SIZE, CUBE_SIZE),
-        // Componentes de Lógica
+        // Lógica
         MovementIntent::default(),
         MovementStats {
             speed: 3.0,
             acceleration: 5.0,
-        }, // Criatura é mais lenta e menos ágil
+        },
         Creature,
         AutonomousMovement {
             timer: Timer::from_seconds(3.0, TimerMode::Repeating),
         },
         Name::new("Creature"),
-        // Componentes de Renderização e Posição
+        // Renderização e posição
         Mesh3d(meshes.add(Cuboid::from_length(CUBE_SIZE))),
         MeshMaterial3d(materials.add(Color::srgb_u8(200, 100, 100))),
         Transform::from_xyz(2.0, 2.0, 0.0),

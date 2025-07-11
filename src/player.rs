@@ -1,33 +1,20 @@
 use crate::movement::MovementIntent;
-use bevy::prelude::*; // Importando do nosso novo módulo
+use bevy::prelude::*;
 
-// --- Plugin ---
+pub const PLAYER_HEIGHT: f32 = 1.0;
+pub const PLAYER_RADIUS: f32 = 0.4;
 
 pub struct PlayerPlugin;
 
 impl Plugin for PlayerPlugin {
     fn build(&self, app: &mut App) {
-        // O sistema de input do jogador é adicionado aqui.
-        // Ele roda no Update, pois inputs devem ser capturados o mais rápido possível.
         app.add_systems(Update, handle_keyboard_input);
     }
 }
 
-// --- Componentes ---
-
-/// Componente marcador para a entidade do jogador.
 #[derive(Component)]
 pub struct Player;
 
-// --- Constantes Específicas do Jogador ---
-
-pub const PLAYER_HEIGHT: f32 = 1.0;
-pub const PLAYER_RADIUS: f32 = 0.4;
-
-// --- Sistemas ---
-
-/// Sistema para ler o input do teclado e atualizar o MovementIntent do jogador.
-/// (Código movido de main.rs, sem alteração de lógica)
 fn handle_keyboard_input(
     keyboard_input: Res<ButtonInput<KeyCode>>,
     mut query: Query<&mut MovementIntent, With<Player>>,
