@@ -12,29 +12,6 @@ use player::{PLAYER_HEIGHT, PLAYER_RADIUS, Player, PlayerPlugin};
 
 const GROUND_RADIUS: f32 = 20.0;
 
-fn main() {
-    App::new()
-        .add_plugins((
-            DefaultPlugins.set(WindowPlugin {
-                primary_window: Some(Window {
-                    title: "TCC - Simulação de Ecossistema".to_string(),
-                    position: WindowPosition::Centered(MonitorSelection::Index(1)),
-                    // resolution: (1280., 720.).into(),
-                    ..default()
-                }),
-                ..default()
-            }),
-            PhysicsPlugins::default(),
-            PhysicsDebugPlugin::default(),
-            MovementPlugin,
-            PlayerPlugin,
-            CreaturePlugin,
-            CameraPlugin,
-        ))
-        .add_systems(Startup, setup)
-        .run();
-}
-
 fn setup(
     mut commands: Commands,
     mut meshes: ResMut<Assets<Mesh>>,
@@ -55,7 +32,7 @@ fn setup(
         ExternalForce::default(),
         LinearDamping(2.0),
         LockedAxes::ROTATION_LOCKED,
-        Collider::capsule(PLAYER_RADIUS / 2.0, PLAYER_HEIGHT),
+        Collider::capsule(PLAYER_RADIUS, PLAYER_HEIGHT),
         // Lógica
         MovementIntent::default(),
         MovementStats {
@@ -104,4 +81,27 @@ fn setup(
         },
         Transform::from_xyz(4.0, 8.0, 4.0),
     ));
+}
+
+fn main() {
+    App::new()
+        .add_plugins((
+            DefaultPlugins.set(WindowPlugin {
+                primary_window: Some(Window {
+                    title: "TCC - Simulação de Ecossistema".to_string(),
+                    position: WindowPosition::Centered(MonitorSelection::Index(1)),
+                    // resolution: (1280., 720.).into(),
+                    ..default()
+                }),
+                ..default()
+            }),
+            PhysicsPlugins::default(),
+            PhysicsDebugPlugin::default(),
+            MovementPlugin,
+            PlayerPlugin,
+            CreaturePlugin,
+            CameraPlugin,
+        ))
+        .add_systems(Startup, setup)
+        .run();
 }
