@@ -1,0 +1,211 @@
+% Modelo de Trabalho Acadêmico do curso de Engenharia da Computação em conformidade com
+% ABNT NBR 14724:2011: Informação e documentação - Trabalhos acadêmicos 
+% Autor Marcos Vinícius da Silva
+% ------------------------------------------------------------------------
+% ------------------------------------------------------------------------
+
+\documentclass[
+	12pt,				% tamanho da fonte
+	openright,			% capítulos começam em página ímpar (insere página vazia caso preciso)
+	oneside,			% para impressão em verso e anverso. Oposto a oneside
+	a4paper,			% tamanho do papel. 
+	brazil				% o último idioma é o principal do documento
+	]{abntex2}
+
+% ---
+% Pacotes básicos 
+% ---
+\usepackage{lmodern}			% Usa a fonte Latin Modern			
+\usepackage[T1]{fontenc}		% Selecao de codigos de fonte.
+\usepackage[utf8]{inputenc}		% Codificacao do documento (conversão automática dos acentos)
+\usepackage{lastpage}			% Usado pela Ficha catalográfica
+\usepackage{indentfirst}		% Indenta o primeiro parágrafo de cada seção.
+\usepackage{color}				% Controle das cores
+\usepackage{graphicx}			% Inclusão de gráficos
+\usepackage{microtype} 			% para melhorias de justificação
+% ---
+		
+% ---
+% Pacotes adicionais, usados apenas no âmbito do Modelo Canônico do abnteX2
+% ---
+\usepackage{lipsum}				% para geração de dummy text
+% ---
+
+% ---
+% Pacotes de citações
+% ---
+\usepackage[brazilian,hyperpageref]{backref}	 % Paginas com as citações na bibl
+\usepackage[alf]{abntex2cite}	% Citações padrão ABNT
+\usepackage{monografia}
+% ---
+
+% ---
+% Outros pacotes
+% ---
+\usepackage{adjustbox}
+\usepackage{amsmath}
+% ---
+
+% Informações de dados para CAPA e FOLHA DE ROSTO
+\titulo{Aplicação de Redes Neurais e Aprendizado Por Reforço Profundo em Agentes Inteligentes em Jogos Eletrônicos}
+\autor{Marcos Vinícius da Silva}
+\local{Divinópolis - Brasil}
+\data{\today}
+\orientador{Arismar Morais Gonçalves Junior}
+\instituicao{%
+  Universidade Estadual de Minas Gerais -- UEMG
+  \par
+  Unidade Divinópolis
+  \par
+  Curso de Engenharia da Computação}
+\tipotrabalho{Monografia}
+% O preambulo deve conter o tipo do trabalho, o objetivo, 
+% o nome da instituição e a área de concentração 
+\preambulo{Monografia apresentada ao Curso de Engenharia de Computação da UEMG Unidade Divinópolis, como requisito parcial para obtenção do título de Bacharel em Engenharia da Computação, sob a orientação do Prof. Arismar}
+% ---
+
+
+% ---
+% Configurações de aparência do PDF final
+
+% alterando o aspecto da cor azul
+\definecolor{blue}{RGB}{41,5,195}
+
+% informações do PDF
+\makeatletter
+\hypersetup{
+     	%pagebackref=true,
+		pdftitle={\@title}, 
+		pdfauthor={\@author},
+    	pdfsubject={\imprimirpreambulo},
+	    pdfcreator={LaTeX with abnTeX2},
+		pdfkeywords={abnt}{latex}{abntex}{abntex2}{trabalho acadêmico}, 
+		colorlinks=true,       		% false: boxed links; true: colored links
+    	linkcolor=blue,          	% color of internal links
+    	citecolor=blue,        		% color of links to bibliography
+    	filecolor=magenta,      		% color of file links
+		urlcolor=blue,
+		bookmarksdepth=4
+}
+\makeatother
+% --- 
+
+% --- 
+% Espaçamentos entre linhas e parágrafos 
+% --- 
+
+% O tamanho do parágrafo é dado por:
+\setlength{\parindent}{1.3cm}
+
+% Controle do espaçamento entre um parágrafo e outro:
+\setlength{\parskip}{0.2cm}  % tente também \onelineskip
+
+\makeindex
+
+\begin{document}
+
+% Retira espaço extra obsoleto entre as frases.
+\frenchspacing 
+
+%Elementos Pré Textuais
+\imprimircapa
+\imprimirfolhaderosto*
+
+%\include{fichaCatalografica}
+%\include{errata} %Caso seu texto tenha errata descomentar esta linha
+\include{folhaAprovacao}
+%\include{dedicatoria}
+%\include{agradecimentos}
+%\include{epigrafe}
+
+
+\pagenumbering{roman} % MODIFICANDO A FORMA DE NUMERAÇÃO DAS PÁGINAS
+% inserir o sumario
+\pdfbookmark[0]{\contentsname}{toc}
+\tableofcontents*
+\cleardoublepage
+% inserir lista de ilustrações
+\pdfbookmark[0]{\listfigurename}{lof}
+\listoffigures*
+\cleardoublepage
+% inserir lista de tabelas
+\pdfbookmark[0]{\listtablename}{lot}
+\listoftables*
+\cleardoublepage
+% inserir lista de abreviaturas e siglas
+\begin{siglas}
+  \item[IA] Inteligência artificial
+  \item[DRL] \textit{Deep reinforcement learning}, aprendizado por reforço profundo
+  \item[GOAP] \textit{Goal-oriented action planners}, planejadores de ações orientados a metas
+  \item[NPC] \textit{Non-playable character}, personagem não-jogável
+  \item[ReLU] \textit{Rectified linear unit}, unidade linear retificada 
+\end{siglas}
+% inserir lista de símbolos
+\begin{simbolos}
+    \item[$ z $] Letra latina z
+    \item[$ \sum $] Operador de somatório
+    \item[$ i $] Índice do somatório
+    \item[$ n $] Limite superior do somatório
+    \item[$ w_i $] Peso com índice \( i \)
+    \item[$ \cdot $] Símbolo de multiplicação
+    \item[$ x_i $] Entrada com índice \( i \)
+    \item[$ b $] Termo de polarização
+    \item[$ f(z) $] Função que aplica a transformação sobre \( z \)
+    \item[$ \max $] Função máxima
+    \item[$ a $] Saída do neurônio
+    \item[$ f $] Função de ativação
+    \item[$ \eta $] Taxa de aprendizado
+    \item[$ \frac{\partial J}{\partial w_i} $] Gradiente da função de custo em relação ao peso \( w_i \)
+    \item[$ \frac{\partial E}{\partial w_i} $] Gradiente do erro em relação ao peso \( w_i \)
+    \item[$ \frac{\partial E}{\partial a} $] Gradiente do erro em relação à saída \( a \)
+    \item[$ \frac{\partial a}{\partial z} $] Gradiente da saída \( a \) em relação à entrada \( z \)
+    \item[$ \frac{\partial z}{\partial w_i} $] Gradiente da entrada \( z \) em relação ao peso \( w_i \)
+\end{simbolos}
+
+% RESUMOS
+\include{resumo}
+\include{abstract}
+
+% ELEMENTOS TEXTUAIS
+\textual
+%Incluindo os capítulos
+\pagenumbering{arabic} % MODIFICANDO A FORMA DE NUMERAÇÃO DAS PÁGINAS
+\include{capitulo1}
+\include{capitulo2}
+\include{capitulo3}
+\include{capitulo4}
+\include{capitulo5}
+\include{capitulo6}
+%\include{capitulo7}
+
+% ----------------------------------------------------------
+% ELEMENTOS PÓS-TEXTUAIS
+% ----------------------------------------------------------
+\postextual
+% ----------------------------------------------------------
+
+% ----------------------------------------------------------
+% Referências bibliográficas
+% ----------------------------------------------------------
+\bibliography{bibliografia}
+
+% ----------------------------------------------------------
+% Glossário
+% ----------------------------------------------------------
+% Consulte o manual da classe abntex2 para orientações sobre o glossário.
+%\glossary
+
+% Apêndices
+%\include{apendice}
+% ---
+% Anexos
+%\include{anexos}
+
+%---------------------------------------------------------------------
+% INDICE REMISSIVO
+%---------------------------------------------------------------------
+\phantompart
+\printindex
+%---------------------------------------------------------------------
+
+\end{document}

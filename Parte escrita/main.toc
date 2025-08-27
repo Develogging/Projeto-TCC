@@ -1,0 +1,38 @@
+\changetocdepth {4}
+\babel@toc {brazil}{}\relax 
+\setlength {\cftchapterindent }{\cftlastnumwidth } \setlength {\cftchapternumwidth }{2em}
+\setlength {\cftchapterindent }{\cftlastnumwidth } \setlength {\cftchapternumwidth }{2em}
+\setlength {\cftchapterindent }{\cftlastnumwidth } \setlength {\cftchapternumwidth }{2em}
+\setlength {\cftchapterindent }{\cftlastnumwidth } \setlength {\cftchapternumwidth }{2em}
+\setlength {\cftchapterindent }{\cftlastnumwidth } \setlength {\cftchapternumwidth }{2em}
+\setlength {\cftchapterindent }{0em} \setlength {\cftchapternumwidth }{\cftlastnumwidth }
+\contentsline {chapter}{\chapternumberline {1}\MakeTextUppercase []{Introdução}}{1}{chapter.1}%
+\contentsline {chapter}{Introdução}{1}{chapter.1}%
+\contentsline {section}{\numberline {1.1}Objetivos}{1}{section.1.1}%
+\contentsline {subsection}{\numberline {1.1.1}Objetivo Geral}{1}{subsection.1.1.1}%
+\contentsline {subsection}{\numberline {1.1.2}Objetivos Específicos}{1}{subsection.1.1.2}%
+\setlength {\cftchapterindent }{0em} \setlength {\cftchapternumwidth }{\cftlastnumwidth }
+\contentsline {chapter}{\chapternumberline {2}\MakeTextUppercase []{Revisão de Literatura}}{3}{chapter.2}%
+\contentsline {chapter}{Revisão de Literatura}{3}{chapter.2}%
+\setlength {\cftchapterindent }{0em} \setlength {\cftchapternumwidth }{\cftlastnumwidth }
+\contentsline {chapter}{\chapternumberline {3}\MakeTextUppercase []{Fundamentação Teórica}}{5}{chapter.3}%
+\contentsline {chapter}{Fundamentação Teórica}{5}{chapter.3}%
+\contentsline {section}{\numberline {3.1}Inteligência Artificial e Sua Aplicação em Jogos}{5}{section.3.1}%
+\contentsline {section}{\numberline {3.2}Redes Neurais Artificiais}{6}{section.3.2}%
+\contentsline {section}{\numberline {3.3}Aprendizado Por Reforço Profundo}{10}{section.3.3}%
+\contentsline {subsection}{\numberline {3.3.1}Apredizado Por Reforço}{10}{subsection.3.3.1}%
+\contentsline {subsection}{\numberline {3.3.2}Aprendizado Profundo}{11}{subsection.3.3.2}%
+\contentsline {subsection}{\numberline {3.3.3}Integração do Aprendizado por Reforço com Aprendizado Profundo}{11}{subsection.3.3.3}%
+\setlength {\cftchapterindent }{0em} \setlength {\cftchapternumwidth }{\cftlastnumwidth }
+\contentsline {chapter}{\chapternumberline {4}\MakeTextUppercase []{Metodologia}}{13}{chapter.4}%
+\contentsline {chapter}{Metodologia}{13}{chapter.4}%
+\setlength {\cftchapterindent }{0em} \setlength {\cftchapternumwidth }{\cftlastnumwidth }
+\contentsline {chapter}{\chapternumberline {5}\MakeTextUppercase []{Resultados Esperados}}{15}{chapter.5}%
+\contentsline {chapter}{Resultados Esperados}{15}{chapter.5}%
+\setlength {\cftchapterindent }{0em} \setlength {\cftchapternumwidth }{\cftlastnumwidth }
+\contentsline {chapter}{\chapternumberline {6}\MakeTextUppercase []{Cronograma}}{16}{chapter.6}%
+\contentsline {chapter}{Cronograma}{16}{chapter.6}%
+\vspace {\cftbeforechapterskip }
+\setlength {\cftchapterindent }{\cftlastnumwidth } \setlength {\cftchapternumwidth }{2em}
+\contentsline {chapter}{\MakeTextUppercase []{Refer\^encias}}{17}{section*.14}%
+\vspace {\cftbeforechapterskip }

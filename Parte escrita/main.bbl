@@ -1,0 +1,110 @@
+\providecommand{\abntreprintinfo}[1]{%
+ \citeonline{#1}}
+\setlength{\labelsep}{0pt}\begin{thebibliography}{}
+\providecommand{\abntrefinfo}[3]{}
+\providecommand{\abntbstabout}[1]{}
+\abntbstabout{v-1.9.7 }
+
+\bibitem[Aggarwal 2018]{aggarwal2018neural}
+\abntrefinfo{Aggarwal}{AGGARWAL}{2018}
+{AGGARWAL, C.~C. \emph{Neural Networks and Deep Learning: A Textbook}. 1st. ed.
+  Cham: Springer, 2018.}
+
+\bibitem[Cutter 2000]{cutter2000brain}
+\abntrefinfo{Cutter}{CUTTER}{2000}
+{CUTTER, M. A.~G. \emph{Brain: Understanding Neurobiology through the Study of
+  Addiction}. Colorado Springs: BSCS, 2000.}
+
+\bibitem[Dawe et al. 2015]{dawe2015behavior}
+\abntrefinfo{Dawe et al.}{DAWE et al.}{2015}
+{DAWE, M. et al. Behavior selection algorithms: An overview. In:  RABIN, S.
+  (Ed.). \emph{Game AI Pro: Collected Wisdom of Game AI Professionals}. 1st.
+  ed. [S.l.]: CRC Press, 2015. p. 47--60.}
+
+\bibitem[Dill 2015]{dill2015whatis}
+\abntrefinfo{Dill}{DILL}{2015}
+{DILL, K. What is game ai. In:  RABIN, S. (Ed.). \emph{Game AI Pro: Collected
+  Wisdom of Game AI Professionals}. 1st. ed. [S.l.]: CRC Press, 2015. p.~3--9.}
+
+\bibitem[Glorot, Bengio e Allauzen 2011]{glorot2011understanding}
+\abntrefinfo{Glorot, Bengio e Allauzen}{GLOROT; BENGIO; ALLAUZEN}{2011}
+{GLOROT, X.; BENGIO, Y.; ALLAUZEN, A. Understanding the difficulty of training
+  deep feedforward neural networks. In:  \emph{Proceedings of the Thirteenth
+  International Conference on Artificial Intelligence and Statistics
+  (AISTATS)}. [S.l.: s.n.], 2011.}
+
+\bibitem[Goodfellow, Bengio e Courville 2016]{goodfellow2016deep}
+\abntrefinfo{Goodfellow, Bengio e Courville}{GOODFELLOW; BENGIO;
+  COURVILLE}{2016}
+{GOODFELLOW, I.; BENGIO, Y.; COURVILLE, A. \emph{Deep Learning}. Cambridge: MIT
+  Press, 2016.}
+
+\bibitem[Haykin 2008]{haykin2008neural}
+\abntrefinfo{Haykin}{HAYKIN}{2008}
+{HAYKIN, S. \emph{Neural Networks and Learning Machines}. 3rd. ed. Upper Saddle
+  River: Pearson Education, 2008.}
+
+\bibitem[Hinton, Nair e Russell 2012]{hinton2012layer}
+\abntrefinfo{Hinton, Nair e Russell}{HINTON; NAIR; RUSSELL}{2012}
+{HINTON, G.~E.; NAIR, V.; RUSSELL, B. Layer normalization.
+\emph{2012}, 2012.}
+
+\bibitem[Krizhevsky, Sutskever e Hinton 2012]{krizhevsky2012imagenet}
+\abntrefinfo{Krizhevsky, Sutskever e Hinton}{KRIZHEVSKY; SUTSKEVER;
+  HINTON}{2012}
+{KRIZHEVSKY, A.; SUTSKEVER, I.; HINTON, G.~E. Imagenet classification with deep
+  convolutional neural networks. In:  \emph{Proceedings of the 25th
+  International Conference on Neural Information Processing Systems (NIPS)}.
+  [S.l.: s.n.], 2012.}
+
+\bibitem[LeCun, Bengio e Hinton 2015]{lecun2015deep}
+\abntrefinfo{LeCun, Bengio e Hinton}{LECUN; BENGIO; HINTON}{2015}
+{LECUN, Y.; BENGIO, Y.; HINTON, G. Deep learning.
+\emph{Nature}, v.~521, n.~7553, p. 436--444, 2015.}
+
+\bibitem[Lillicrap et al. 2016]{lillicrap2016continuous}
+\abntrefinfo{Lillicrap et al.}{LILLICRAP et al.}{2016}
+{LILLICRAP, T. et al. Continuous control with deep reinforcement learning. In:
+  \emph{Proceedings of the 4th International Conference on Learning
+  Representations (ICLR)}. San Juan: [s.n.], 2016.}
+
+\bibitem[Mnih et al. 2015]{mnih2015human}
+\abntrefinfo{Mnih et al.}{MNIH et al.}{2015}
+{MNIH, V. et al. Human-level control through deep reinforcement learning.
+\emph{Nature}, v.~518, n.~7540, p. 529--533, 2015.}
+
+\bibitem[Nielsen 2015]{nielsen2015neural}
+\abntrefinfo{Nielsen}{NIELSEN}{2015}
+{NIELSEN, M.~A. \emph{Neural Networks and Deep Learning: A Textbook}. [s.n.],
+  2015. Determination of whether a neural network is overfitting or not, based
+  on validation and training errors. Dispon{\'\i}vel em:
+  \url{http://neuralnetworksanddeeplearning.com/}.}
+
+\bibitem[Rumelhart, Hinton e Williams 1986]{rumelhart1986learning}
+\abntrefinfo{Rumelhart, Hinton e Williams}{RUMELHART; HINTON; WILLIAMS}{1986}
+{RUMELHART, D.~E.; HINTON, G.~E.; WILLIAMS, R.~J. Learning representations by
+  back-propagating errors.
+\emph{Nature}, v.~323, n.~6088, p. 533--536, 1986.}
+
+\bibitem[Russel e Norvig 2020]{russel2020artificial}
+\abntrefinfo{Russel e Norvig}{RUSSEL; NORVIG}{2020}
+{RUSSEL, S.; NORVIG, P. \emph{Artificial Intelligence: A Modern Approach}. 4th.
+  ed. [S.l.]: Pearson, 2020.}
+
+\bibitem[Silver et al. 2016]{silver2016mastering}
+\abntrefinfo{Silver et al.}{SILVER et al.}{2016}
+{SILVER, D. et al. Mastering the game of go with deep neural networks and tree
+  search.
+\emph{Nature}, v.~529, n.~7587, p. 484--489, 2016.}
+
+\bibitem[Sutton e Barto 2018]{sutton2018reinforcement}
+\abntrefinfo{Sutton e Barto}{SUTTON; BARTO}{2018}
+{SUTTON, R.~S.; BARTO, A.~G. \emph{Reinforcement Learning: An Introduction}.
+  2nd. ed. Cambridge: MIT Press, 2018.}
+
+\bibitem[Turing 1950]{turing1950computing}
+\abntrefinfo{Turing}{TURING}{1950}
+{TURING, A.~M. Computing machinery and intelligence.
+\emph{Mind}, v.~59, n.~236, p. 433--460, 1950.}
+
+\end{thebibliography}

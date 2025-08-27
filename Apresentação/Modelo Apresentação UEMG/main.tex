@@ -1,0 +1,477 @@
+\documentclass[compress]{beamer}
+
+%Importando alguns pacotes
+\usepackage{lipsum}
+\usepackage{fancyvrb}
+\usepackage{ragged2e}
+\usepackage{xcolor}
+\usepackage{default}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usepackage[alf]{abntex2cite}
+
+%Importando alguns pacotes
+\usepackage{appendixnumberbeamer}
+\usepackage{booktabs}
+\usepackage[scale=2]{ccicons}
+
+%Importando alguns pacotes
+\usepackage{pgfplots}
+\usepgfplotslibrary{dateplot}
+
+%Importando alguns pacotes e criando um novo comando
+\usepackage{xspace}
+\newcommand{\themename}{\textbf{\textsc{metropolis}}\xspace}
+
+
+%Usando tikz
+\usetikzlibrary{positioning}
+%\usepgflibrary{decorations.pathreplacing}
+\usetikzlibrary{decorations.pathreplacing}
+\usetikzlibrary{decorations.pathmorphing}
+\usetikzlibrary[patterns]
+%\tikzstyle{every text node part}
+%\usetikzlibrary{arrows,backgrounds,positioning,fit} 
+\usetikzlibrary{calc}
+
+% para gerar graficos no latex
+\usepackage{pgfplots}
+\pgfplotsset{compat=newest}
+
+%Importando alguns pacotes
+\usepackage[newfloat]{minted}
+\usepackage{caption}
+\usemintedstyle{borland}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{MnSymbol}
+\usepackage[brazil]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[Algoritmo]{algorithm}
+\usepackage[noend]{algorithmic}
+
+\usepackage[brazilian,hyperpageref]{backref}	 % Paginas com as citações na bibl
+\usepackage[alf]{abntex2cite}	% Citações padrão ABNT
+
+%Setando bibliografia beamer
+\setbeamertemplate{bibliography entry title}{}
+\setbeamertemplate{bibliography entry location}{}
+\setbeamertemplate{bibliography entry note}{}
+
+\newcounter{saveenumi}
+\newcommand{\seti}{\setcounter{saveenumi}{\value{enumi}}}
+\newcommand{\conti}{\setcounter{enumi}{\value{saveenumi}}}
+
+%\usepackage{shadethm}
+
+%\definecolor{shadethmcolor}{rgb}{.75,.75,.75}
+
+%Definindo novas cores
+\definecolor{LightGray}{gray}{0.95}
+\definecolor{shadecolor}{rgb}{.9, .9, .9}
+
+%\newshadetheorem{theorem}{\scshape Teorema}[chapter]
+\newtheorem{teorema}[theorem]{\scshape Teorema}
+\newtheorem{proposicao}[theorem]{\scshape Proposição}
+\newtheorem{corolario}[theorem]{\scshape Corolário}
+\newtheorem{lema}[theorem]{\scshape Lema}
+\newtheorem{definicao}[theorem]{\scshape Definição}
+\newtheorem{conjectura}[theorem]{\scshape Conjectura}
+\newtheorem{escolio}[theorem]{\scshape Escólio}
+\newtheorem{exemplo}[theorem]{\scshape Exemplo}
+\newtheorem{exemplos}[theorem]{\scshape Exemplos}
+\newtheorem{propriedade}[theorem]{\scshape Propriedade}
+
+\renewcommand{\u}{{\bf u}}
+\renewcommand{\v}{{\bf v}}
+\renewcommand{\sin}{\operatorname{sen}}
+\renewcommand{\tan}{\operatorname{tg}}
+\providecommand{\cas}{\operatorname{cas}}
+\providecommand{\mdc}{\mathrm{mdc}}
+\providecommand{\f}{{\bf f}}
+
+\newcommand{\ie}{\textit{i.e.}}
+\newcommand{\eg}{\textit{e.g.}}
+%\newcommand{\qed}{\hfill $\square$}
+
+\renewcommand\Re{\operatorname{Re}}
+\renewcommand\Im{\operatorname{Im}}
+
+\providecommand{\x}{{\bf x}}
+\providecommand{\y}{{\bf y}}
+\providecommand{\w}{{\bf w}}
+\providecommand{\f}{{\bf f}}
+\providecommand{\q}{{\bf q}}
+\providecommand{\bfa}{{\bf a}}
+\providecommand{\bfb}{{\bf b}}
+\providecommand{\bfc}{{\bf c}}
+\providecommand{\bfd}{{\bf d}}
+\providecommand{\bfe}{{\bf e}}
+\providecommand{\bfs}{{\bf s}}
+\providecommand{\bfz}{{\bf z}}
+\providecommand{\zero}{{\bf 0}}
+\providecommand{\spn}{\mathrm{span}}
+\providecommand{\posto}{\mathrm{posto}}
+\providecommand{\nul}{\mathrm{nul}}
+\providecommand{\proj}{\mathrm{proj}}
+\providecommand{\tr}{\mathrm{tr}}
+\providecommand{\sgn}{\mathrm{sgn}}
+
+\providecommand{\cov}{\mathrm{cov}}
+
+\providecommand{\dilation}{\mathcal{D}}
+\providecommand{\erosion}{\mathcal{E}}
+\providecommand{\open}{\mathcal{O}}
+\providecommand{\close}{\mathcal{C}}
+
+\newcommand*{\Bhat}{\skew{3}{\hat}{B}}
+
+%\usetheme{AnnArbor}
+%\usetheme{Antibes}
+%\usetheme{Bergen}
+%\usetheme{Berkeley}
+%\usetheme{Berlin}
+%\usetheme{Boadilla}
+%\usetheme{boxes}
+%\usetheme{CambridgeUS}
+%\usetheme{Copenhagen}
+%\usetheme{Darmstadt}
+%\usetheme{default}
+%\usetheme{Frankfurt}
+%\usetheme{Goettingen}
+%\usetheme{Hannover}
+%\usetheme{Ilmenau}
+%\usetheme{JuanLesPins}
+%\usetheme{Luebeck}
+%\usetheme{Madrid}
+%\usetheme{Malmoe}
+%\usetheme{Marburg}
+%\usetheme{Montpellier}
+%\usetheme{PaloAlto}
+%\usetheme{Pittsburgh}
+%\usetheme{Rochester}
+%\usetheme{Singapore}
+%\usetheme{Szeged}
+%\usetheme{Warsaw}
+\usetheme{metropolis}
+
+% copiado do site:
+% http://latex-beamer-class.10966.n7.nabble.com/Covering-images-transparent-i-e-dimmed-figures-td1504.html
+\usepackage{ifthen}
+
+\makeatletter
+\newcommand{\includecoveredgraphics}[2][]{
+    \ifthenelse{\the\beamer@coveringdepth=1}{
+        \tikz
+            \node[inner sep=0pt,outer sep=0pt,opacity=0.15]
+                {\includegraphics[#1]{#2}};
+    }{
+        \tikz
+            \node[inner sep=0pt,outer sep=0pt]
+                {\includegraphics[#1]{#2}};%
+    }
+} 
+\makeatother
+
+
+% Definindo novas cores para utilizar código
+\definecolor{verde}{rgb}{0,0.5,0}
+% Configurando layout para mostrar codigos C++
+\usepackage{listings}
+\lstset{
+  language=C++,
+  basicstyle=\ttfamily\small,
+  keywordstyle=\color{blue},
+  stringstyle=\color{verde},
+  commentstyle=\color{red},
+  extendedchars=true,
+  showspaces=false,
+  showstringspaces=false,
+  numbers=left,
+  numberstyle=\tiny,
+  breaklines=true,
+  backgroundcolor=\color{green!10},
+  breakautoindent=true,
+  captionpos=b,
+  xleftmargin=5pt,
+}
+
+\newenvironment{code}{\captionsetup{type=listing}}{}
+\SetupFloatingEnvironment{listing}{name=Código Fonte}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%Definindo informações da apresentação                 %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%Definindo Título
+\title{Apresentação de TCC}
+%\subtitle{Um modelo de apresentação}
+%Definindo Instituição
+\institute{Curso de Engenharia da Computação - UEMG - Unidade Divinópolis}
+%Definindo autores
+\author{Tiago Alves de Oliveira \and \\
+Orientador: Nome do Orientador}
+%Definindo data (pode ser colocada manualmente
+\date{\today}
+%Colocando logo da UEMG
+\titlegraphic{\hfill\includegraphics[height=2cm]{figuras/UEMG_vertical.jpg}}
+
+\begin{document}
+
+
+
+%Criando primeiro slide
+\maketitle
+
+
+%Criando Sumário
+\begin{frame}{sumario}
+    \frametitle{Sumário}
+    \tableofcontents
+\end{frame}
+
+\section{Introdução}
+
+\section{Objetivos}
+
+\section{Metodologia ou Matériais e Métodos}
+
+\section{Desenvolvimento}
+
+\section{Resultados e Análises}
+
+\section{Conclusão}
+
+\begin{frame}[label=conclusao]{Conclusão}
+    Conclusão I
+    
+    Conclusão II
+\end{frame}
+
+\begin{frame}[label=trabalhosfuturos]{Trabalhos Futuros}
+    Texto texto texo
+    \begin{enumerate}
+        \item<+-> {} 
+        \item<+-> {}
+        \item<+-> {}
+        \item<+-> {}
+    \end{enumerate}
+\end{frame}
+
+\section{Exemplos de utilização}
+
+\begin{frame}[fragile]{Duas colunas}
+     \begin{columns}[T] % contents are top vertically aligned
+     \begin{column}[T]{5cm} % each column can also be its own environment
+     Conteúdo da primeira colunas \\ dividido em duas linhas
+     \end{column}
+     \begin{column}[T]{5cm} % alternative top-align that's better for graphics
+          \includegraphics[height=3cm]{figuras/UEMG_vertical.jpg}
+     \end{column}
+     \end{columns}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Blocos}
+  \begin{block}{Bloco Padrão}
+        Block content.
+      \end{block}
+
+      \begin{alertblock}{Bloco de Alerta}
+        Block content.
+      \end{alertblock}
+
+      \begin{exampleblock}{Bloco de Exemplo}
+        Block content.
+      \end{exampleblock}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Utilização de Listas}
+    Exemplo de listas normal aparecendo todos os itens
+    \begin{enumerate}
+        \vfill \item {C}
+        \vfill \item {C++}
+        \vfill \item {PHP}
+        \vfill \item {JAVA}
+        \vfill \item {C\#}
+    \end{enumerate}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Utilização de Listas}
+    Exemplo de listas normal aparecendo todos os itens
+    \begin{enumerate}
+       \vfill \item<+-> {C}
+        \vfill \item<+-> {C++}
+        \vfill \item<+-> {PHP}
+        \vfill \item<+-> {JAVA}
+        \vfill \item<+-> {C\#}
+    \end{enumerate}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Utilização de Listas}
+    Exemplo de listas normal aparecendo todos os itens
+    \begin{itemize}
+        \item {C}
+        \item {C++}
+        \item {PHP}
+        \item {JAVA}
+        \item {C\#}
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Utilização de Listas}
+    Exemplo de listas uma por vez
+    \begin{itemize}
+        \vfill \item<+-> {C}
+        \vfill \item<+-> {C++}
+        \vfill \item<+-> {PHP}
+        \vfill \item<+-> {JAVA}
+        \vfill \item<+-> {C\#}
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Utlizando Tabelas}
+  \begin{table}
+    \caption{Linguagens de Programação mais utilizadas em 2017 \cite{ieeespectrum}}
+    \begin{tabular}{lr}
+      \toprule
+      Linguagem & Ranking Spectrum\\
+      \midrule
+      Python & 100\% \\
+      C & 100\% \\
+      Java & 99,8\% \\
+      C++ & 96,9\% \\
+      C\# & 88,6\% \\
+      \bottomrule
+    \end{tabular}
+  \end{table}
+\end{frame}
+
+\begin{frame}[fragile]{}
+    \frametitle{Inserindo imagens}
+    \justifying
+     A inserção de figuras é realizada com o comando: \\
+     \verb+\begin{figure}[pos]+ \\
+     e a inserção de tabelas com o comando : \\
+     \verb+\begin{table}[pos]+. \\
+     O parâmetro pos pode ser uma combinação de:
+    
+    \begin{itemize}
+        \item[h] No lugar onde ocorreu no texto;
+        \item[t] No topo de uma página;
+        \item[b] Na parte inferior de uma página;
+        \item[p] Em uma página própria.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{}
+    \frametitle{Inserindo codigo}
+    \begin{minted}{c}
+        int main(){
+            printf("Hello World");
+            return 0;
+        }
+    \end{minted}
+\end{frame}
+
+
+\begin{frame}[fragile]{}
+    \frametitle{Inserindo codigo}
+    \begin{minted}[frame=lines,framesep=2mm,baselinestretch=1.2,bgcolor=LightGray,
+    fontsize=\footnotesize,linenos]{python}
+        import numpy as np
+        
+        def soma(x, y):
+            return x + y
+    \end{minted}
+\end{frame}
+
+\begin{frame}[fragile]{}
+    \frametitle{Inserindo arquivo com código}
+    \inputminted{c}{main.c}
+\end{frame}
+
+\begin{frame}[fragile]{Inserindo arquivo com código}
+    \begin{code}
+        \captionof{listing}{Meu código em  C}
+        \label{code:c-code}
+        \inputminted[frame=lines,framesep=2mm,baselinestretch=1.2,bgcolor=LightGray,fontsize=\footnotesize,linenos]{c}{main.c}
+       
+    \end{code}
+\end{frame}
+
+\begin{frame}[fragile]{}
+    \frametitle{Brincando com cores}
+    \begin{minted}[bgcolor=cyan!10]{java}
+        /**
+        * comentario
+        */
+        public class HelloWorldApp {
+          public static void main (String argv[])
+          {
+          // Comentario
+          System.out.println("Hello World!");
+          }
+        }
+    \end{minted}
+    
+\end{frame}
+
+
+\begin{frame}[fragile]{}
+    \frametitle{Adicionando arquivos (outro formato)}
+    \lstinputlisting[language=c]{file.c}
+    \begin{alertblock}<+->{Declaração de arquivo}
+        Esquecer o * irá acarretar em um erro de execução.
+    \end{alertblock}
+\end{frame}
+
+\begin{frame}[fragile]{Leitura um arquivo texto}
+    \begin{itemize}
+        \vfill \item<+-> Para fazer a leitura de um arquivo texto é necessário utilizar a função fopen, como pode ser visto no exemplo abaixo:
+    \end{itemize}  
+    \lstinputlisting[language=c]{open.c}
+\end{frame}
+
+\defverbatim[colored]
+\lstI{
+  \begin{lstlisting}[caption=Escrita de Arquivos, label=code1]
+    int main() {
+        // Define variables at the beginning
+        // of the block, as in C:
+        CStash intStash, stringStash;
+        int i;
+        char* cp;
+        ifstream in;
+        string line;
+        [...]
+    }
+  \end{lstlisting}
+}
+
+\begin{frame}[fragile]{A Listings Demo}{C++}
+    \lstI
+\end{frame}
+
+
+
+\begin{frame}[standout]
+  Perguntas?
+\end{frame}
+
+\begin{frame}
+  Obrigado!
+  %Agradecimentos
+\end{frame}
+
+\begin{frame}{Bibliografia}
+    \bibliography{bibliografia}
+\end{frame}
+
+\end{document}
